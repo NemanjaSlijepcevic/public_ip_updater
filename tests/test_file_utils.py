@@ -1,5 +1,9 @@
-from file_utils import write_current_value, read_previous_value
 import pytest  # noqa: F401
+from file_utils import (
+    write_current_value,
+    read_previous_value,
+    check_and_create_file
+)
 
 
 class TestReadWriteCurrentIp:
@@ -60,5 +64,34 @@ class TestReadWriteCurrentIp:
 
         mock_logger.exception.assert_called_once_with(
             f"An unexpected error occurred while reading from file:"
+            f" {filename}"
+        )
+
+    def test_check_file_not_exists(self, mocker):
+        filename = 'current_ip.txt'
+        mock_logger = mocker.patch('file_utils.logger')
+        mocker.patch('os.path.exists', return_value=False)
+        check_and_create_file()
+        mock_logger.debug.assert_called_once_with(
+            f"File '{filename}' has been created."
+        )
+
+    def test_check_file_exists(self, mocker):
+        filename = 'current_ip.txt'
+        mock_logger = mocker.patch('file_utils.logger')
+        mocker.patch('os.path.exists', return_value=True)
+        check_and_create_file()
+        mock_logger.debug.assert_called_once_with(
+            f"File '{filename}' already exists."
+        )
+
+    def test_check_file_not_exists_exception(self, mocker):
+        filename = 'current_ip.txt'
+        mock_logger = mocker.patch('file_utils.logger')
+        mocker.patch('os.path.exists', return_value=False)
+        mocker.patch('builtins.open', side_effect=OSError)
+        check_and_create_file()
+        mock_logger.exception.assert_called_once_with(
+            f"An unexpected error occurred while creating a file:"
             f" {filename}"
         )

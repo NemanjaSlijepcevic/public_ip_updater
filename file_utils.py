@@ -1,3 +1,4 @@
+import os
 import logging
 
 
@@ -5,7 +6,6 @@ logger = logging.getLogger(__name__)
 PREVIOUS_VALUE_FILE = 'current_ip.txt'
 
 
-# Function to read the previous value from a file
 def read_previous_value():
     try:
         logger.debug(f"Reading from file: {PREVIOUS_VALUE_FILE}")
@@ -24,7 +24,6 @@ def read_previous_value():
         return None
 
 
-# Function to write the current value to a file
 def write_current_value(value):
     try:
         logger.debug(f"Writing to file: {PREVIOUS_VALUE_FILE}")
@@ -36,3 +35,17 @@ def write_current_value(value):
             f"An unexpected error occurred while writing to file:"
             f" {PREVIOUS_VALUE_FILE}"
         )
+
+
+def check_and_create_file():
+    if os.path.exists(PREVIOUS_VALUE_FILE):
+        logger.debug(f"File '{PREVIOUS_VALUE_FILE}' already exists.")
+    else:
+        try:
+            with open(PREVIOUS_VALUE_FILE, 'w'):
+                logger.debug(f"File '{PREVIOUS_VALUE_FILE}' has been created.")
+        except Exception:
+            logger.exception(
+                f"An unexpected error occurred while creating a file:"
+                f" {PREVIOUS_VALUE_FILE}"
+            )

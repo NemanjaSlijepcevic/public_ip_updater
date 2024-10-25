@@ -3,7 +3,7 @@ import time
 import logging
 from yaml_utils import update_yaml_file
 from ip_checker import get_current_value
-from config_utils import check_inputs, check_frequency
+from config_utils import check_inputs, check_frequency, check_and_create_file
 from file_utils import read_previous_value, write_current_value
 
 
@@ -20,6 +20,7 @@ logger = logging.getLogger(__name__)
 
 
 check_inputs()
+check_and_create_file()
 frequency = check_frequency()
 
 
