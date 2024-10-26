@@ -7,7 +7,7 @@ FILE_DATA_PATH = os.getenv(
     'FILE_DATA_PATH',
     'http.middlewares.default-whitelist.ipAllowList.sourceRange'
 )
-TARGET_FILE = 'configuartion.yml'
+TARGET_FILE = 'configuration.yml'
 logger = logging.getLogger(__name__)
 
 
