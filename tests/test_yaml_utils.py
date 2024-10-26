@@ -50,7 +50,7 @@ class TestReadWriteYamlFile:
 
     # Successfully writes a valid IP address to a file
     def test_successful_ip_replace(self, mocker):
-        filename = 'configuartion.yml'
+        filename = 'configuration.yml'
         previous = '192.168.0.1'
         current = '192.168.1.1'
         mock_logger = mocker.patch('yaml_utils.logger')
@@ -66,7 +66,7 @@ class TestReadWriteYamlFile:
         update_yaml_file(current, previous)  # for repeating the test
 
     def test_successful_ip_write(self, mocker):
-        filename = 'configuartion.yml'
+        filename = 'configuration.yml'
         previous = ''
         current = '192.168.3.1'
         mock_logger = mocker.patch('yaml_utils.logger')
@@ -89,7 +89,7 @@ class TestReadWriteYamlFile:
                     file.write(line)
 
     def test_empty_value(self, mocker):
-        filename = 'configuartion.yml'
+        filename = 'configuration.yml'
         previous = '192.168.0.1'
         current = '192.168.1.1'
         FILE_DATA_PATH = (
@@ -122,7 +122,7 @@ class TestReadWriteYamlFile:
 
     def test_read_exception(self, mocker):
 
-        filename = 'configuartion.yml'
+        filename = 'configuration.yml'
         previous = '192.168.0.1'
         current = '192.168.1.1'
 
@@ -138,7 +138,7 @@ class TestReadWriteYamlFile:
 
     def test_write_exception(self, mocker):
 
-        filename = 'configuartion.yml'
+        filename = 'configuration.yml'
         previous = '192.168.0.1'
         current = '192.168.1.1'
 
