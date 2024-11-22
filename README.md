@@ -9,15 +9,15 @@ This program works in conjunction with [public_ip_tracker](https://github.com/Ne
 ## Features
 
 - Periodically checks the server's public IP address.
-- Updates the IP address in a YAML file under the `sourceRange` field.
+- Updates the IP address in a YAML file under the defined field.
 - Supports logging of application activity, both to a file and to standard output.
 - Runs continuously, checking the IP every 60 seconds.
 
 ## How It Works
 
 1. **Fetch the Current IP**: The program fetches the current public IP address using an API endpoint (`NODE_IP_DOMAIN`) secured with a Bearer token (`API_IP_TOKEN`).
-2. **Compare with Previous IP**: It reads the previously stored IP from `current_ip.txt`. If the IP has changed, it updates the `sourceRange` list in the specified YAML file (`configuration.yml`).
-3. **Update YAML File**: If the IP has changed, it replaces the old IP or appends the new one to the `sourceRange` list in the YAML file.
+2. **Compare with Previous IP**: It reads the previously stored IP from `current_ip.txt`. If the IP has changed, it updates the `specified_file_path` list in the specified YAML file (`configuration.yml`).
+3. **Update YAML File**: If the IP has changed, it replaces the old IP or appends the new one to the `specified_file_path` list in the YAML file.
 4. **Log Activities**: All actions are logged, and any errors or HTTP failures are reported.
 
 ## Configuration
@@ -35,7 +35,7 @@ To configure this program, the following environment variables are required:
 ### Files
 
 - **current_ip.txt**: Stores the previous public IP address.
-- **configuration.yml**: The YAML file containing the `sourceRange` list for updating the IP.
+- **configuration.yml**: The YAML file containing the `specified_file_path` list for updating the IP.
 
 ## Setup
 
